@@ -36,13 +36,13 @@ class CurlTest extends AbstractWebserverTest
         ));
 
         $curl->exec('http://unknown/curl.txt');
-        $this->assertRegExp('/^Could not connect to host.*$/', $curl->getErrorMessage());
+        $this->assertEquals('Could not connect to host', $curl->getErrorMessage());
 
         $curl->exec(sprintf('xyz://localhost:%d/@404.txt', WEBSERVER_PORT));
-        $this->assertRegExp('/^Unknown protocol. Only http and https are allowed.*$/', $curl->getErrorMessage());
+        $this->assertEquals('Unknown protocol. Only http and https are allowed.', $curl->getErrorMessage());
 
         $curl->exec('');
-        $this->assertRegExp('/^Unable to parse URL.*$/', $curl->getErrorMessage());
+        $this->assertEquals('Unable to parse URL', $curl->getErrorMessage());
     }
 
     public function testGetRequestHeaders()
