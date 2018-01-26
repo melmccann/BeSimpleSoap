@@ -42,7 +42,7 @@ class CurlTest extends AbstractWebserverTest
         $this->assertRegExp('/^Unknown protocol. Only http and https are allowed.*$/', $curl->getErrorMessage());
 
         $curl->exec('');
-        $this->assertEquals('Unable to parse URL', $curl->getErrorMessage());
+        $this->assertRegExp('/^Unable to parse URL.*$/', $curl->getErrorMessage());
     }
 
     public function testGetRequestHeaders()
